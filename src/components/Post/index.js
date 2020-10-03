@@ -19,6 +19,6 @@ export default function Post(props) {
 }
 
 Post.propTypes = {
-    props: PropTypes.object,
-    props: PropTypes.string
+    title: PropTypes.string,
+    body: PropTypes.string
 };
