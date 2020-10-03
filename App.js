@@ -4,7 +4,6 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 //constatnt
 import {
   COLORS,
