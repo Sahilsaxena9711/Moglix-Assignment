@@ -19,15 +19,6 @@ class CreatePost extends Component {
         title: ""
     }
 
-    componentDidUpdate(prevProps) {
-        if ((prevProps.createPostStatus === STATE_STATUS.FETCHING || prevProps.createPostStatus === STATE_STATUS.UNFETCHED) && this.props.createPostStatus === STATE_STATUS.FETCHED) {
-            this.setState({
-                body: "",
-                title: ""
-            });
-        }
-    }
-
 
     onChangeTitle = (title) => {
         this.setState({
@@ -57,7 +48,12 @@ class CreatePost extends Component {
             id: new Date().getTime(),
             title,
             body
-        })
+        });
+        // initialize states for body and title after submission
+        this.setState({
+            body: "",
+            title: ""
+        });
     }
 
     render() {
