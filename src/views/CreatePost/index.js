@@ -1,5 +1,6 @@
 // dependencies
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { ScrollView, Text, View } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -98,4 +99,9 @@ const mapDispatchTopProps = dispatch => bindActionCreators({
     fetchCreatePosts
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchTopProps)(CreatePost)
+export default connect(mapStateToProps, mapDispatchTopProps)(CreatePost);
+
+CreatePost.propTypes = {
+    createPostStatus: PropTypes.string,
+    fetchCreatePosts: PropTypes.func
+};

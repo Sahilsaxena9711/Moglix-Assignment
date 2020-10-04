@@ -1,5 +1,6 @@
 // dependencies
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { FlatList, View, Text, ActivityIndicator } from "react-native";
 import { Search, Post } from "../../components";
 import { fetchPosts } from "../../redux/actions";
@@ -84,3 +85,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListPost);
+
+ListPost.propTypes = {
+    postsData: PropTypes.array,
+    postsStatus: PropTypes.string,
+    fetchPosts: PropTypes.func
+};
