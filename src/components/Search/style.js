@@ -5,7 +5,7 @@ import { COLORS } from "../../constants";
 
 const styles = StyleSheet.create({
     inputContainer: {
-        paddingVertical: 2,
+        paddingVertical: 8,
         paddingHorizontal: 12,
         borderRadius: 4,
         margin: 20,

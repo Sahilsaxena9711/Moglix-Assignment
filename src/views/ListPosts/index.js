@@ -1,17 +1,26 @@
 // dependencies
 import React, { Component } from "react";
-import { FlatList, View, Text } from "react-native";
+import { FlatList, View, Text, ActivityIndicator } from "react-native";
 import { Search, Post } from "../../components";
+import { fetchPosts } from "../../redux/actions";
 //styles
 import styles from "./style";
 //constants
-import { POSTS_DATA } from "../../constants";
+import { COLORS, STATE_STATUS } from "../../constants";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-export default class ListPost extends Component {
+class ListPost extends Component {
 
     state = {
         search: ""
     }
+
+    componentDidMount() {
+        //fetch posts action call
+        this.props.fetchPosts();
+    }
+
 
     onSearch = search => {
         this.setState({
@@ -21,8 +30,8 @@ export default class ListPost extends Component {
 
     // filter data on basis of text entered in search
     onFilterData = () => {
-        let result = POSTS_DATA;
-        result = POSTS_DATA.filter(post =>
+        let result = this.props.postsData;
+        result = result.filter(post =>
             post.title.toLowerCase().includes(this.state.search.toLowerCase())
         );
         return result;
@@ -36,7 +45,14 @@ export default class ListPost extends Component {
         return <View />
     }
 
-    renderItem = ({ item }) => <Post {...item} />
+    renderItem = ({ item }) => <Post {...item} />;
+
+    renderFooterComponent = () => {
+        if (this.props.postsStatus === STATE_STATUS.FETCHING) {
+            return <ActivityIndicator color={COLORS.placeholder} />
+        }
+        return <View />
+    }
 
     render() {
         const { search } = this.state;
@@ -49,6 +65,7 @@ export default class ListPost extends Component {
                     data={filteredResult}
                     contentContainerStyle={styles.listContainer}
                     renderItem={this.renderItem}
+                    ListFooterComponent={this.renderFooterComponent}
                     ListEmptyComponent={this.renderEmptyComponent}
                     keyExtractor={item => `item-${item.id}`}
                 />
@@ -56,3 +73,14 @@ export default class ListPost extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    postsStatus: state.post.status || STATE_STATUS.FETCHING,
+    postsData: state.post.data || []
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    fetchPosts
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListPost);

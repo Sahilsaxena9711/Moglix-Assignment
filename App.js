@@ -4,6 +4,10 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Provider } from "react-redux";
+import store from "./src/redux/store";
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
 //constatnt
 import {
   COLORS,
@@ -41,20 +45,26 @@ const Tab = createBottomTabNavigator();
 
 export default App = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color }) => tabBarIcon(focused, color, route),
-        })}
-        tabBarOptions={tabBarOptions}
-      >
-        {SCREENS.map((screen, key) => <Tab.Screen
-          key={key}
-          name={screen.name}
-          component={screen.component}
-        />
-        )}
-      </Tab.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Provider store={store}>
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color }) => tabBarIcon(focused, color, route),
+              })}
+              tabBarOptions={tabBarOptions}
+            >
+              {SCREENS.map((screen, key) => <Tab.Screen
+                key={key}
+                name={screen.name}
+                component={screen.component}
+              />
+              )}
+            </Tab.Navigator>
+          </NavigationContainer>
+        </Provider>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
