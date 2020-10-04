@@ -4,13 +4,17 @@ import PropTypes from "prop-types";
 import { TouchableOpacity, Text } from "react-native";
 // styles
 import styles from "./styles";
+import { COLORS } from "../../constants";
 
 export default function Buttom(props) {
     return (
         <TouchableOpacity
             activeOpacity={0.7}
             onPress={props.onPress}
-            style={styles.buttonContainer}
+            disabled={props.disabled}
+            style={[styles.buttonContainer, {
+                backgroundColor: props.disabled ? COLORS.placeholder : COLORS.primary
+            }]}
         >
             <Text style={styles.buttonText}>
                 {props.title || "Submit"}
@@ -21,5 +25,6 @@ export default function Buttom(props) {
 
 Buttom.propTypes = {
     title: PropTypes.string,
-    onPress: PropTypes.func
+    onPress: PropTypes.func,
+    disabled: PropTypes.bool
 };

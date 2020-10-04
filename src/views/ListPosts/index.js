@@ -75,8 +75,8 @@ class ListPost extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    postsStatus: state.post.status || STATE_STATUS.FETCHING,
-    postsData: state.post.data || []
+    postsStatus: state.post.posts.status || STATE_STATUS.FETCHING,
+    postsData: state.post.posts.data || []
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

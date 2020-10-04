@@ -3,11 +3,19 @@
 import {
     fetchPosts,
     fetchedPosts,
-    failedFetchPosts
+    failedFetchPosts,
+
+    fetchCreatePosts,
+    fetchedCreatePosts,
+    failedFetchCreatePosts,
 } from "./posts";
 
 export {
     fetchPosts,
     fetchedPosts,
-    failedFetchPosts
+    failedFetchPosts,
+
+    fetchCreatePosts,
+    fetchedCreatePosts,
+    failedFetchCreatePosts,
 }

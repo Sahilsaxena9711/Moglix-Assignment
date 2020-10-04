@@ -18,4 +18,12 @@ export const getPosts = () =>
             return {
                 data: STATE_STATUS.SERVER_ERROR
             }
-        })
+        });
+
+export const createPost = (post) => {
+    return {
+        data: {
+            ...post
+        }
+    }
+}
